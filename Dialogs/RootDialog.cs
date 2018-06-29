@@ -30,8 +30,7 @@
             {
                 await context.PostAsync(
                     "The following commands are supported:\n\n"
-                    +"getHealth,"
-                    +"deployServer");
+                    +"getHealth, deployServer");
             }
             else if (message.Text.ToLower().Contains("health"))
             {
@@ -41,9 +40,17 @@
             {
                 await context.PostAsync(
                     "The following customers are available:\n\n"
-                    +"AMWA,"
-                    +"PSS,"
-                    +"CIQ");
+                    +"AMWA, PSS, CIQ");
+            }
+            else if (message.Text.ToLower().Contains("myip"))
+            {
+                WebClient web = new WebClient();
+                System.IO.Stream stream = web.OpenRead("http://www.myip.ch/");
+                using (System.IO.StreamReader reader = new System.IO.StreamReader(stream))
+                {
+                String myip = reader.ReadToEnd();
+                }
+                await context.PostAsync(myip);
             }
             else
             {
