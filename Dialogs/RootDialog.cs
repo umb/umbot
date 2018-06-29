@@ -56,6 +56,10 @@
             {
                 await this.ping(context);                
             }
+            else if (message.Text.ToLower().Contains("test"))
+            {
+                await this.restTest(context);
+            }
             else
             {
                 await context.PostAsync("I am sorry I don't understand you");
@@ -114,7 +118,7 @@
         }
 
 
-        //Lookup my IP (Debugging Tool)
+        //Ping IP (Debugging Tool)
         public async Task ping(IDialogContext context)
         {
             //await this.SendPingMessageAsync(context);
@@ -139,6 +143,25 @@
         {
             string html = string.Empty;
             string url = "http://www.myip.ch";
+
+            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
+
+            using (HttpWebResponse response = (HttpWebResponse) request.GetResponse())
+            using (Stream stream = response.GetResponseStream())
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                html = reader.ReadToEnd();
+            }
+
+            //Console.WriteLine(html);
+            await context.PostAsync(html);
+        }
+
+        //Rest Test (Debugging Tool)
+        public async Task restTest(IDialogContext context)
+        {
+            string html = string.Empty;
+            string url = "https://api.github.com/repos/powershell/powershell/issues";
 
             HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
 
