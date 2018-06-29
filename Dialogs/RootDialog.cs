@@ -88,7 +88,15 @@
                         pinger.Dispose();
                     }
                 }
-               await context.PostAsync(pingable);
+                if (pingable = true)
+                {
+                    string answer = "Ping success";
+                } 
+                else
+                {
+                    string answer = "Ping failed";
+                }
+                await context.PostAsync(answer);
             }
             else
             {
