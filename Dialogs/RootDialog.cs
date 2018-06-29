@@ -30,14 +30,21 @@
             {
                 await context.PostAsync(
                     "The following commands are supported:\n\n"
-                    +"getHealth\n\n"
+                    +"getHealth,"
                     +"deployServer");
             }
             else if (message.Text.ToLower().Contains("health"))
             {
                 await this.SendHealthMessageAsync(context);
             }
-
+            else if(message.Text.ToLower().ContainsAny("client","customer"))
+            {
+                await context.PostAsync(
+                    "The following customers are available:\n\n"
+                    +"AMWA,"
+                    +"PSS,"
+                    +"CIQ");
+            }
             else
             {
                 await context.PostAsync("I am sorry I don't understand you");
