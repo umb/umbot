@@ -50,20 +50,6 @@
             }
             else if (message.Text.ToLower().Contains("myip"))
             {
-                string html = string.Empty;
-                string url = "http://www.myip.ch";
-
-                HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
-
-                using (HttpWebResponse response = (HttpWebResponse) request.GetResponse())
-                using (Stream stream = response.GetResponseStream())
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    html = reader.ReadToEnd();
-                }
-
-                //Console.WriteLine(html);
-                await context.PostAsync(html);
                 await this.myip(context);
             }
             else if (message.Text.ToLower().Contains("ping"))
