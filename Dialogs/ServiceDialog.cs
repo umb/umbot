@@ -6,7 +6,7 @@
     using Microsoft.Bot.Connector;
 
     [Serializable]
-    public class NameDialog : IDialog<string>
+    public class ServiceDialog : IDialog<string>
     {
         private int attempts = 3;
 
