@@ -163,10 +163,17 @@
             //BlogSites test = JsonConvert.DeserializeObject<BlogSites>(html); 
             //JsonConvert.PopulateObject(html, test);
             //var test = JsonConvert.DeserializeObject<dynamic>(html); 
-            //await context.PostAsync(html);
+            await context.PostAsync(html);
             //Movie test = JsonConvert.DeserializeObject<Movie>(html);
-            dynamic test = JsonConvert.DeserializeObject(html);
-            await context.PostAsync(test.id);
+
+            public class Person
+            {
+            public int Age {get;set;}
+            public string Name {get;set;}
+            }
+
+            //dynamic test = JsonConvert.DeserializeObject(html);
+            //await context.PostAsync(test.id);
             }
         }
     }
