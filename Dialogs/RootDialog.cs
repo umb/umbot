@@ -35,7 +35,7 @@
             }
             else if (message.Text.ToLower().Contains("health"))
             {
-                await this.SendWelcomeMessageAsync(context);
+                await this.SendHealthMessageAsync(context);
             }
 
             else
@@ -45,9 +45,9 @@
             }     
         }
 
-        private async Task SendWelcomeMessageAsync(IDialogContext context)
+        private async Task SendHealthMessageAsync(IDialogContext context)
         {
-            await context.PostAsync("Hi, I'm the Basic Multi Dialog bot. Let's get started.");
+            await context.PostAsync("Which Service do you want to inspect?");
 
             context.Call(new NameDialog(), this.NameDialogResumeAfter);
         }
@@ -64,7 +64,7 @@
             {
                 await context.PostAsync("I'm sorry, I'm having issues understanding you. Let's try again.");
 
-                await this.SendWelcomeMessageAsync(context);
+                await this.SendHealthMessageAsync(context);
             }
         }
 
@@ -81,10 +81,10 @@
             {
                 await context.PostAsync("I'm sorry, I'm having issues understanding you. Let's try again.");
             }
-            finally
-            {
-                await this.SendWelcomeMessageAsync(context);
-            }
+            //finally
+            //{
+            //    await this.SendHealthMessageAsync(context);
+            //}
         }
     }
 }
