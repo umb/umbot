@@ -35,16 +35,14 @@
             }
             else if (message.Text.ToLower().Contains("health"))
             {
-                await context.PostAsync(
-                    "What do you want?");
+                await this.SendWelcomeMessageAsync(context);
             }
 
             else
             {
                 await context.PostAsync("I am sorry I don't understand you");
                 context.Wait(MessageReceivedAsync);
-            }
-//            await this.SendWelcomeMessageAsync(context);
+            }     
         }
 
         private async Task SendWelcomeMessageAsync(IDialogContext context)
