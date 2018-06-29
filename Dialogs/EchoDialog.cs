@@ -32,9 +32,9 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             if (message.Text == "help")
             {
                 await context.PostAsync(
-                    "The following commands are supported\r\n
-                    getHealth\r\n
-                    deployServer");
+                    "The following commands are supported\r\n"
+                    +"getHealth\r\n"
+                    +"deployServer");
             }
             else
             {
