@@ -1,10 +1,8 @@
 using System;
 using System.Threading.Tasks;
-
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Builder.Dialogs;
 using System.Net.Http;
-
 
 namespace Microsoft.Bot.Sample.SimpleEchoBot
 {
@@ -34,7 +32,9 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             if (message.Text == "help")
             {
                 await context.PostAsync(
-                    "The following commands are supported\r\n@getHealth");
+                    "The following commands are supported\r\n
+                    getHealth\r\n
+                    deployServer");
             }
             else
             {
