@@ -9,6 +9,8 @@
     using System.IO;
     //Used for ICMP
     using System.Net.NetworkInformation;
+    //Json Parsing
+    using Newtonsoft.Json;
 
 
     #pragma warning disable 1998
@@ -156,6 +158,8 @@
             using (WebClient wc = new WebClient())
             {
             var html = wc.DownloadString(url);
+            //var json = JsonConvert.DeserializeObject(html);
+            //string name = json.first_name;
             await context.PostAsync(html);
             }
         }
