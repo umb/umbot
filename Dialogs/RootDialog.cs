@@ -160,7 +160,9 @@
             var html = wc.DownloadString(url);
             //var json = JsonConvert.DeserializeObject(html);
             //string name = json.first_name;
-            BlogSites test = JsonConvert.DeserializeObject<BlogSites>(html);  
+            //BlogSites test = JsonConvert.DeserializeObject<BlogSites>(html); 
+            //JsonConvert.PopulateObject(html, test);
+            var test = JsonConvert.DeserializeObject<dynamic>(html); 
             await context.PostAsync(html);
             await context.PostAsync(test);
             }
