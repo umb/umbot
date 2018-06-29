@@ -29,13 +29,19 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
                     "Didn't get that!",
                     promptStyle: PromptStyle.Auto);
             }
-            if (message.Text == "help")
+            else if (message.Text == "help")
             {
                 await context.PostAsync(
-                    "The following commands are supported\r\n"
+                    "The following commands are supported:\r\n"
                     +"getHealth\r\n"
                     +"deployServer");
             }
+            else if (message.Text == "getHealth")
+            {
+                await context.PostAsync(
+                    "Sorry, can't do that yet :(");
+            }
+
             else
             {
                 await context.PostAsync($"{this.count++}: You said {message.Text}");
