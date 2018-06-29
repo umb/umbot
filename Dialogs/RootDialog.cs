@@ -37,7 +37,7 @@
             {
                 await this.SendHealthMessageAsync(context);
             }
-            else if(message.Text.ToLower().ContainsAny("client","customer"))
+            else if(message.Text.ToLower().Contains("client") || message.Text.ToLower().Contains("customer"))
             {
                 await context.PostAsync(
                     "The following customers are available:\n\n"
