@@ -4,6 +4,9 @@
     using System.Threading.Tasks;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
+    using System.Net;
+    using System.IO;
+
 
     #pragma warning disable 1998
 
@@ -44,13 +47,20 @@
             }
             else if (message.Text.ToLower().Contains("myip"))
             {
-                WebClient web = new WebClient();
-                System.IO.Stream stream = web.OpenRead("http://www.myip.ch/");
-                using (System.IO.StreamReader reader = new System.IO.StreamReader(stream))
+                string html = string.Empty;
+                string url = "http://www.something.com";
+
+                HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
+
+                using (HttpWebResponse response = (HttpWebResponse) request.GetResponse())
+                using (Stream stream = response.GetResponseStream())
+                using (StreamReader reader = new StreamReader(stream))
                 {
-                String myip = reader.ReadToEnd();
+                    html = reader.ReadToEnd();
                 }
-                await context.PostAsync(myip);
+
+                //Console.WriteLine(html);
+                await context.PostAsync(html);
             }
             else
             {
