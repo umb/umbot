@@ -29,8 +29,8 @@
             if (message.Text == "help")
             {
                 await context.PostAsync(
-                    "The following commands are supported:\n"
-                    +"getHealth\n"
+                    "The following commands are supported:\n\n"
+                    +"getHealth\n\n"
                     +"deployServer");
             }
             else if (message.Text.ToLower().Contains("health"))
