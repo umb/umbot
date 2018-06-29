@@ -2,10 +2,10 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Builder.Prompts;
+//using Microsoft.Bot.Builder.Prompts;
 using System.Net.Http;
 
-namespace Microsoft.Bot.Sample.SimpleEchoBot
+namespace UMBot
 {
     [Serializable]
     public class EchoDialog : IDialog<object>
