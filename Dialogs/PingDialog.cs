@@ -44,7 +44,7 @@ namespace BasicMultiDialogBot.Dialogs
                 {
                     if (pinger != null)
                     {
-                        pinger.Dispose()
+                        pinger.Dispose();
                     }
                 }
 
