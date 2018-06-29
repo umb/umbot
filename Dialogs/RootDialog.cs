@@ -21,13 +21,30 @@
             context.Wait(this.MessageReceivedAsync);
         }
 
-        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
+        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
         {
             /* When MessageReceivedAsync is called, it's passed an IAwaitable<IMessageActivity>. To get the message,
              *  await the result. */
-            var message = await result;
+            var message = await argument;
+            if (message.Text == "help")
+            {
+                await context.PostAsync(
+                    "The following commands are supported:\n"
+                    +"getHealth\n"
+                    +"deployServer");
+            }
+            else if (message.Text.ToLower().Contains("health"))
+            {
+                await context.PostAsync(
+                    "What do you want?");
+            }
 
-            await this.SendWelcomeMessageAsync(context);
+            else
+            {
+                await context.PostAsync("I am sorry I don't understand you");
+                context.Wait(MessageReceivedAsync);
+            }
+//            await this.SendWelcomeMessageAsync(context);
         }
 
         private async Task SendWelcomeMessageAsync(IDialogContext context)
