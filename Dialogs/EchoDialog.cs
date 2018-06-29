@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Builder.Dialogs;
-//using Microsoft.Bot.Builder.Prompts;
+using Microsoft.Bot.Builder.Prompts;
 using System.Net.Http;
 
 namespace UMBot
