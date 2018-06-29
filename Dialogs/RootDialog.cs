@@ -54,22 +54,7 @@
             }
             else if (message.Text.ToLower().Contains("ping"))
             {
-                //await this.SendPingMessageAsync(context);
-                // Ping's the local machine.
-                Ping pingSender = new Ping ();
-                string address = "8.8.8.8";
-                PingReply reply = pingSender.Send (address);
-
-                if (reply.Status == IPStatus.Success)
-                {
-                    await context.PostAsync("Success");
-                }
-                else
-                {
-                    //Console.WriteLine (reply.Status);
-                    await context.PostAsync("Failure");
-                }
-                
+                await this.ping(context);                
             }
             else
             {
@@ -102,6 +87,7 @@
         }
 
 
+        //Waterfall Dialog for Health Check
         private async Task SendHealthMessageAsync(IDialogContext context)
         {
             //await context.PostAsync("Which Service do you want to inspect?");
@@ -127,6 +113,28 @@
             }
         }
 
+
+        //Lookup my IP (Debugging Tool)
+        public async Task ping(IDialogContext context)
+        {
+            //await this.SendPingMessageAsync(context);
+            // Ping's the local machine.
+            Ping pingSender = new Ping ();
+            string address = "8.8.8.8";
+            PingReply reply = pingSender.Send (address);
+
+            if (reply.Status == IPStatus.Success)
+            {
+                await context.PostAsync("Success");
+            }
+            else
+            {
+                //Console.WriteLine (reply.Status);
+                await context.PostAsync("Failure");
+            }
+        }
+
+        //Lookup my IP (Debugging Tool)
         public async Task myip(IDialogContext context)
         {
             string html = string.Empty;
@@ -144,23 +152,6 @@
             //Console.WriteLine(html);
             await context.PostAsync(html);
         }
-
-        //private async Task AgeDialogResumeAfter(IDialogContext context, IAwaitable<int> result)
-        //{
-        //    try
-        //    {
-        //        this.age = await result;
-        //        await context.PostAsync($"Your name is { name } and your age is { age }.");
-        //    }
-        //    catch (TooManyAttemptsException)
-        //    {
-        //        await context.PostAsync("I'm sorry, I'm having issues understanding you. Let's try again.");
-        //    }
-        //    //finally
-        //    //{
-        //    //    await this.SendHealthMessageAsync(context);
-        //    //}
-        //}
     }
 }
 
