@@ -70,7 +70,7 @@
                 //await this.SendPingMessageAsync(context);
                 // Ping's the local machine.
                 Ping pingSender = new Ping ();
-                IPAddress address = 8.8.8.8;
+                string address = "8.8.8.8";
                 PingReply reply = pingSender.Send (address);
 
                 if (reply.Status == IPStatus.Success)
