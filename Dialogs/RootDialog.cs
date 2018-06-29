@@ -141,39 +141,23 @@
         //Lookup my IP (Debugging Tool)
         public async Task myip(IDialogContext context)
         {
-            string html = string.Empty;
             string url = "http://www.myip.ch";
-
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
-
-            using (HttpWebResponse response = (HttpWebResponse) request.GetResponse())
-            using (Stream stream = response.GetResponseStream())
-            using (StreamReader reader = new StreamReader(stream))
+            using (WebClient wc = new WebClient())
             {
-                html = reader.ReadToEnd();
-            }
-
-            //Console.WriteLine(html);
+            var html = wc.DownloadString(url);
             await context.PostAsync(html);
+            }
         }
 
         //Rest Test (Debugging Tool)
         public async Task restTest(IDialogContext context)
         {
-            string html = string.Empty;
-            string url = "https://api.github.com/repos/powershell/powershell/issues";
-
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
-
-            using (HttpWebResponse response = (HttpWebResponse) request.GetResponse())
-            using (Stream stream = response.GetResponseStream())
-            using (StreamReader reader = new StreamReader(stream))
+            string url = "http://www.myip.ch";
+            using (WebClient wc = new WebClient())
             {
-                html = reader.ReadToEnd();
-            }
-
-            //Console.WriteLine(html);
+            var html = wc.DownloadString(url);
             await context.PostAsync(html);
+            }
         }
     }
 }
