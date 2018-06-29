@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Prompts;
 using System.Net.Http;
 
 namespace Microsoft.Bot.Sample.SimpleEchoBot
@@ -20,16 +21,7 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
         {
             var message = await argument;
 
-            if (message.Text == "reset")
-            {
-                PromptDialog.Confirm(
-                    context,
-                    AfterResetAsync,
-                    "Are you sure you want to reset the count? Confirm with 'Yes'",
-                    "Didn't get that!",
-                    promptStyle: PromptStyle.Auto);
-            }
-            else if (message.Text == "help")
+            if (message.Text == "help")
             {
                 await context.PostAsync(
                     "The following commands are supported:\n"
@@ -38,32 +30,59 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             }
             else if (message.Text.ToLower().Contains("health"))
             {
-                await context.PostAsync(
-                    "Sorry, can't do that yet :(");
-                    //await context.Forward(new NewOrderDialog(), this.ResumeAfterNewOrderDialog, message, CancellationToken.None);
-            }
+                dialogs = new DialogSet();
 
+                // Define our dialog
+                dialogs.Add("reserveTable", new WaterfallStep[]
+                {
+                    async (dc, args, next) =>
+                    {
+                        // Prompt for the guest's name.
+                        await dc.Context.SendActivity("Welcome to the reservation service.");
+
+                        await dc.Prompt("dateTimePrompt", "Please provide a reservation date and time.");
+                    },
+                    async(dc, args, next) =>
+                    {
+                        var dateTimeResult = ((DateTimeResult)args).Resolution.First();
+
+                        reservationDate = Convert.ToDateTime(dateTimeResult.Value);
+                        
+                        // Ask for next info
+                        await dc.Prompt("partySizePrompt", "How many people are in your party?");
+
+                    },
+                    async(dc, args, next) =>
+                    {
+                        partySize = (int)args["Value"];
+
+                        // Ask for next info
+                        await dc.Prompt("textPrompt", "Whose name will this be under?");
+                    },
+                    async(dc, args, next) =>
+                    {
+                        reservationName = args["Text"];
+                        string msg = "Reservation confirmed. Reservation details - " +
+                        $"\nDate/Time: {reservationDate.ToString()} " +
+                        $"\nParty size: {partySize.ToString()} " +
+                        $"\nReservation name: {reservationName}";
+                        await dc.Context.SendActivity(msg);
+                        await dc.End();
+                    }
+                });
+
+                // Add a prompt for the reservation date
+                dialogs.Add("dateTimePrompt", new Microsoft.Bot.Builder.Dialogs.DateTimePrompt(Culture.English));
+                // Add a prompt for the party size
+                dialogs.Add("partySizePrompt", new Microsoft.Bot.Builder.Dialogs.NumberPrompt<int>(Culture.English));
+                // Add a prompt for the user's name
+                dialogs.Add("textPrompt", new Microsoft.Bot.Builder.Dialogs.TextPrompt());
+            }
             else
             {
                 await context.PostAsync("I am sorry I don't understand you");
                 context.Wait(MessageReceivedAsync);
             }
         }
-
-        public async Task AfterResetAsync(IDialogContext context, IAwaitable<bool> argument)
-        {
-            var confirm = await argument;
-            if (confirm)
-            {
-                this.count = 1;
-                await context.PostAsync("Reset count");
-            }
-            else
-            {
-                await context.PostAsync("Did not reset count.");
-            }
-            context.Wait(MessageReceivedAsync);
-        }
-
     }
 }
