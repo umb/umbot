@@ -4,8 +4,11 @@
     using System.Threading.Tasks;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
+    //Used for WebCalls
     using System.Net;
     using System.IO;
+    //Used for ICMP
+    using System.Net.NetworkInformation;
 
 
     #pragma warning disable 1998
@@ -62,12 +65,40 @@
                 //Console.WriteLine(html);
                 await context.PostAsync(html);
             }
+            else if (message.Text.ToLower().Contains("ping"))
+            {
+                await this.SendPingMessageAsync(context);
+            }
             else
             {
                 await context.PostAsync("I am sorry I don't understand you");
                 context.Wait(MessageReceivedAsync);
             }     
         }
+
+        //Let's Ping Something
+        private async Task SendPingMessageAsync(IDialogContext context)
+        {
+            context.Call(new PingDialog(), this.PingDialogResumeAfter);
+        }
+        private async Task PingDialogResumeAfter(IDialogContext context, IAwaitable<string> result)
+        {
+            try
+            {
+                this.name = await result;
+
+                await context.PostAsync($"Loading Ping metrics for: { name }.");
+
+                //context.Call(new AgeDialog(this.name), this.AgeDialogResumeAfter);
+            }
+            catch (TooManyAttemptsException)
+            {
+                await context.PostAsync("I'm sorry, I'm having issues understanding you. Let's try again.");
+
+                await this.SendPingMessageAsync(context);
+            }
+        }
+
 
         private async Task SendHealthMessageAsync(IDialogContext context)
         {
