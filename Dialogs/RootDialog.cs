@@ -48,7 +48,7 @@
             else if (message.Text.ToLower().Contains("myip"))
             {
                 string html = string.Empty;
-                string url = "http://www.something.com";
+                string url = "http://www.myip.ch";
 
                 HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
 
