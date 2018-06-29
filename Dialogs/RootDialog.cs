@@ -49,7 +49,7 @@
         {
             await context.PostAsync("Which Service do you want to inspect?");
 
-            context.Call(new NameDialog(), this.NameDialogResumeAfter);
+            context.Call(new ServiceDialog(), this.NameDialogResumeAfter);
         }
 
         private async Task NameDialogResumeAfter(IDialogContext context, IAwaitable<string> result)
@@ -58,7 +58,7 @@
             {
                 this.name = await result;
 
-                context.Call(new ServiceDialog(this.name), this.AgeDialogResumeAfter);
+                context.Call(new AgeDialog(this.name), this.AgeDialogResumeAfter);
             }
             catch (TooManyAttemptsException)
             {
