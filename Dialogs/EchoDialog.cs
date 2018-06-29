@@ -31,6 +31,11 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
                     "Didn't get that!",
                     promptStyle: PromptStyle.Auto);
             }
+            if (message.Text == "help")
+            {
+                await context.PostAsync(
+                    "The following commands are supported\r\n@getHealth");
+            }
             else
             {
                 await context.PostAsync($"{this.count++}: You said {message.Text}");
