@@ -36,7 +36,7 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
                     +"getHealth\r\n"
                     +"deployServer");
             }
-            else if (message.Text == "getHealth")
+            else if (message.Text.ToLower().Contains("gethealth"))
             {
                 await context.PostAsync(
                     "Sorry, can't do that yet :(");
