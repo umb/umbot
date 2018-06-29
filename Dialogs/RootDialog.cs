@@ -162,8 +162,10 @@
             //string name = json.first_name;
             //BlogSites test = JsonConvert.DeserializeObject<BlogSites>(html); 
             //JsonConvert.PopulateObject(html, test);
-            var test = JsonConvert.DeserializeObject<dynamic>(html); 
-            await context.PostAsync(html);
+            //var test = JsonConvert.DeserializeObject<dynamic>(html); 
+            //await context.PostAsync(html);
+            //Movie test = JsonConvert.DeserializeObject<Movie>(html);
+            dynamic test = JsonConvert.DeserializeObject(html);
             await context.PostAsync(test);
             }
         }
