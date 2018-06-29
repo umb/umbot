@@ -67,7 +67,28 @@
             }
             else if (message.Text.ToLower().Contains("ping"))
             {
-                await this.SendPingMessageAsync(context);
+                //await this.SendPingMessageAsync(context);
+                bool pingable = false;
+                Ping pinger = null;
+
+                try
+                {
+                    pinger = new Ping();
+                    PingReply reply = pinger.Send("8.8.8.8");
+                    pingable = reply.Status == IPStatus.Success;
+                }
+                catch (PingException)
+                {
+                    // Discard PingExceptions and return false;
+                }
+                finally
+                {
+                    if (pinger != null)
+                    {
+                        pinger.Dispose();
+                    }
+                }
+               await context.PostAsync(pingable);
             }
             else
             {
