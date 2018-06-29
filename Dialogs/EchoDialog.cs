@@ -45,7 +45,7 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
 
             else
             {
-                await context.PostAsync($"{this.count++}: You said {message.Text}");
+                await context.PostAsync("I am sorry I don't understand you");
                 context.Wait(MessageReceivedAsync);
             }
         }
