@@ -51,7 +51,7 @@
 
             context.Call(new ServiceDialog(), this.NameDialogResumeAfter);
         }
-//
+
         private async Task NameDialogResumeAfter(IDialogContext context, IAwaitable<string> result)
         {
             try
