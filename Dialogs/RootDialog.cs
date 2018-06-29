@@ -88,7 +88,7 @@
                         pinger.Dispose();
                     }
                 }
-                if (pingable = true)
+                if (pingable == true)
                 {
                     string answer = "Ping success";
                 } 
