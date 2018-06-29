@@ -12,7 +12,7 @@
 
         public async Task StartAsync(IDialogContext context)
         {
-            await context.PostAsync("What is your name?");
+            await context.PostAsync("Which Service do you want to inspect?");
 
             context.Wait(this.MessageReceivedAsync);
         }

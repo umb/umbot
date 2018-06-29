@@ -47,7 +47,7 @@
 
         private async Task SendHealthMessageAsync(IDialogContext context)
         {
-            await context.PostAsync("Which Service do you want to inspect?");
+            //await context.PostAsync("Which Service do you want to inspect?");
 
             context.Call(new ServiceDialog(), this.HealthDialogResumeAfter);
         }
@@ -58,7 +58,7 @@
             {
                 this.name = await result;
 
-                await context.PostAsync($"Your name is { name }.");
+                await context.PostAsync($"Loading Health metrics for: { name }.");
 
                 //context.Call(new AgeDialog(this.name), this.AgeDialogResumeAfter);
             }
