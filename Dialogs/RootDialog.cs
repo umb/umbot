@@ -165,9 +165,12 @@
             //var test = JsonConvert.DeserializeObject<dynamic>(html); 
             await context.PostAsync(html);
             //Movie test = JsonConvert.DeserializeObject<Movie>(html);
-            dynamic test = JsonConvert.DeserializeObject<dynamic>(html);
-            //dynamic test = JsonConvert.DeserializeObject(html);
-            await context.PostAsync(test.toString());
+            //dynamic test = JsonConvert.DeserializeObject<dynamic>(html);
+            dynamic test = JsonConvert.DeserializeObject(html);
+            string first_name = test.first_name;
+            string last_name = test.last_name;
+            await context.PostAsync(first_name);
+            await context.PostAsync(last_name);
             }
         }
     }
