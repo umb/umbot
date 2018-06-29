@@ -68,35 +68,21 @@
             else if (message.Text.ToLower().Contains("ping"))
             {
                 //await this.SendPingMessageAsync(context);
-                bool pingable = false;
-                Ping pinger = null;
+                // Ping's the local machine.
+                Ping pingSender = new Ping ();
+                IPAddress address = IPAddress.Loopback;
+                PingReply reply = pingSender.Send (address);
 
-                try
+                if (reply.Status == IPStatus.Success)
                 {
-                    pinger = new Ping();
-                    PingReply reply = pinger.Send("8.8.8.8");
-                    pingable = reply.Status == IPStatus.Success;
+                    await context.PostAsync("Success");
                 }
-                catch (PingException)
-                {
-                    // Discard PingExceptions and return false;
-                }
-                finally
-                {
-                    if (pinger != null)
-                    {
-                        pinger.Dispose();
-                    }
-                }
-                if (pingable == true)
-                {
-                    string answer = "Ping success";
-                } 
                 else
                 {
-                    string answer = "Ping failed";
+                    //Console.WriteLine (reply.Status);
+                    await context.PostAsync("Failure");
                 }
-                await context.PostAsync(answer);
+                
             }
             else
             {
