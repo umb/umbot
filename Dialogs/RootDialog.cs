@@ -166,11 +166,6 @@
             await context.PostAsync(html);
             //Movie test = JsonConvert.DeserializeObject<Movie>(html);
 
-            public class Person
-            {
-            public int Age {get;set;}
-            public string Name {get;set;}
-            }
 
             //dynamic test = JsonConvert.DeserializeObject(html);
             //await context.PostAsync(test.id);
