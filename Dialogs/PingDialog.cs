@@ -33,7 +33,7 @@ namespace BasicMultiDialogBot.Dialogs
                 try
                 {
                     pinger = new Ping();
-                    PingReply reply = pinger.Send(nameOrAddress);
+                    PingReply reply = pinger.Send("8.8.8.8");
                     pingable = reply.Status == IPStatus.Success;
                 }
                 catch (PingException)
