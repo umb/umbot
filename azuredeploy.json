@@ -39,12 +39,16 @@
     },
     "Project": {
       "type": "string",
-      "defaultValue": "CSharp/core-BasicMultiDialog"
+      "defaultValue": "Node/core-MultiDialogs"
     },
-    "MicrosoftAppId": {
+    "WEBSITE_NODE_DEFAULT_VERSION": {
+      "type": "string",
+      "defaultValue": "6.9.5"
+    },
+    "MICROSOFT_APP_ID": {
       "type": "string"
     },
-    "MicrosoftAppPassword": {
+    "MICROSOFT_APP_PASSWORD": {
       "type": "string"
     }
   },
@@ -91,12 +95,16 @@
                 "value": "[parameters('Project')]"
               },
               {
-                "name": "MicrosoftAppId",
-                "value": "[parameters('MicrosoftAppId')]"
+                "name": "WEBSITE_NODE_DEFAULT_VERSION",
+                "value": "[parameters('WEBSITE_NODE_DEFAULT_VERSION')]"
               },
               {
-                "name": "MicrosoftAppPassword",
-                "value": "[parameters('MicrosoftAppPassword')]"
+                "name": "MICROSOFT_APP_ID",
+                "value": "[parameters('MICROSOFT_APP_ID')]"
+              },
+              {
+                "name": "MICROSOFT_APP_PASSWORD",
+                "value": "[parameters('MICROSOFT_APP_PASSWORD')]"
               }
             ]
           }
