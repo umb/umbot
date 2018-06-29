@@ -27,7 +27,7 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
                 PromptDialog.Confirm(
                     context,
                     AfterResetAsync,
-                    "Are you sure you want to reset the count?",
+                    "Are you sure you want to reset the count? Confirm with 'Yes'",
                     "Didn't get that!",
                     promptStyle: PromptStyle.Auto);
             }
@@ -44,7 +44,7 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             if (confirm)
             {
                 this.count = 1;
-                await context.PostAsync("Reset count!!");
+                await context.PostAsync("Reset count");
             }
             else
             {
