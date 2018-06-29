@@ -8,7 +8,7 @@ namespace BasicMultiDialogBot.Dialogs
     using System.Net.NetworkInformation;
 
     [Serializable]
-    public class ServiceDialog : IDialog<string>
+    public class PingDialog : IDialog<string>
     {
         private int attempts = 3;
 
