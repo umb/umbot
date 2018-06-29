@@ -58,7 +58,7 @@
             {
                 this.name = await result;
 
-                context.Call(new AgeDialog(this.name), this.AgeDialogResumeAfter);
+                context.Call(new ServiceDialog(this.name), this.AgeDialogResumeAfter);
             }
             catch (TooManyAttemptsException)
             {
