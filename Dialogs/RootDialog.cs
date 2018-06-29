@@ -64,6 +64,7 @@
 
                 //Console.WriteLine(html);
                 await context.PostAsync(html);
+                await this.myip(context);
             }
             else if (message.Text.ToLower().Contains("ping"))
             {
@@ -140,6 +141,24 @@
             }
         }
 
+        public async Task myip(IDialogContext context)
+        {
+            string html = string.Empty;
+            string url = "http://www.myip.ch";
+
+            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
+
+            using (HttpWebResponse response = (HttpWebResponse) request.GetResponse())
+            using (Stream stream = response.GetResponseStream())
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                html = reader.ReadToEnd();
+            }
+
+            //Console.WriteLine(html);
+            await context.PostAsync(html);
+        }
+
         //private async Task AgeDialogResumeAfter(IDialogContext context, IAwaitable<int> result)
         //{
         //    try
@@ -158,3 +177,4 @@
         //}
     }
 }
+
