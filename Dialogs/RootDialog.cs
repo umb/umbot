@@ -152,7 +152,7 @@
         //Rest Test (Debugging Tool)
         public async Task restTest(IDialogContext context)
         {
-            string url = "http://www.myip.ch";
+            string url = "https://reqres.in/api/users?page=3";
             using (WebClient wc = new WebClient())
             {
             var html = wc.DownloadString(url);
