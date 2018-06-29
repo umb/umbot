@@ -40,6 +40,7 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             {
                 await context.PostAsync(
                     "Sorry, can't do that yet :(");
+                    await context.Forward(new NewOrderDialog(), this.ResumeAfterNewOrderDialog, message, CancellationToken.None);
             }
 
             else
