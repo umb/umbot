@@ -140,23 +140,21 @@
             }
         }
 
-        private async Task AgeDialogResumeAfter(IDialogContext context, IAwaitable<int> result)
-        {
-            try
-            {
-                this.age = await result;
-
-                await context.PostAsync($"Your name is { name } and your age is { age }.");
-
-            }
-            catch (TooManyAttemptsException)
-            {
-                await context.PostAsync("I'm sorry, I'm having issues understanding you. Let's try again.");
-            }
-            //finally
-            //{
-            //    await this.SendHealthMessageAsync(context);
-            //}
-        }
+        //private async Task AgeDialogResumeAfter(IDialogContext context, IAwaitable<int> result)
+        //{
+        //    try
+        //    {
+        //        this.age = await result;
+        //        await context.PostAsync($"Your name is { name } and your age is { age }.");
+        //    }
+        //    catch (TooManyAttemptsException)
+        //    {
+        //        await context.PostAsync("I'm sorry, I'm having issues understanding you. Let's try again.");
+        //    }
+        //    //finally
+        //    //{
+        //    //    await this.SendHealthMessageAsync(context);
+        //    //}
+        //}
     }
 }
