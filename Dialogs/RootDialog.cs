@@ -195,48 +195,49 @@
             await context.PostAsync("Starting Job");
             //string url = "https://portal.sfcore.ch/engine-rest/engine/process-definition/key/aProcessDefinitionKey/start";
             string url = "https://portal.sfcore.ch/engine-rest/process-definition/key/workflow-automation/start";
-            string json = @"{
-            'variables': {
-                'aProcessVariable' : {
-                'value' : 'aStringValue',
-                'type': 'String'
-                }
-            },
-            'businessKey' : 'myBusinessKey',
-            'skipCustomListeners' : true,
-            'startInstructions' :
-                [
-                {
-                    'type': 'startBeforeActivity',
-                    'activityId': 'activityId',
-                    'variables': {
-                    'var': {
-                        'value': 'aVariableValue',
-                        'local': false,
-                        'type': 'String'}
-                    }
-                },
-                {
-                    'type': 'startAfterActivity',
-                    'activityId': 'anotherActivityId',
-                    'variables': {
-                    'varLocal': {
-                        'value': 'anotherVariableValue',
-                        'local': true,
-                        'type': 'String'
-                    }
-                    }
-                }
-                ]
-            }";
+            //string json = @"{
+            //'variables': {
+            //    'aProcessVariable' : {
+            //    'value' : 'aStringValue',
+            //    'type': 'String'
+            //    }
+            //},
+            //'businessKey' : 'myBusinessKey',
+            //'skipCustomListeners' : true,
+            //'startInstructions' :
+            //    [
+            //    {
+            //        'type': 'startBeforeActivity',
+            //        'activityId': 'activityId',
+            //        'variables': {
+            //        'var': {
+            //            'value': 'aVariableValue',
+            //            'local': false,
+            //            'type': 'String'}
+            //        }
+            //    },
+            //    {
+            //        'type': 'startAfterActivity',
+            //        'activityId': 'anotherActivityId',
+            //        'variables': {
+            //        'varLocal': {
+            //            'value': 'anotherVariableValue',
+            //            'local': true,
+            //            'type': 'String'
+            //        }
+            //        }
+            //    }
+            //    ]
+            //}";
+            string json = @"";
             //dynamic testJ = JsonConvert.DeserializeObject(json);
             var testJ = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
             using (var httpClient = new HttpClient())
             {
                 httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
                 //var response = httpClient.GetStringAsync(new Uri(url)).Result;
-                //var response = httpClient.PostAsync(url, testJ).Result;
-                var response = httpClient.PostAsync(url, null).Result;
+                var response = httpClient.PostAsync(url, testJ).Result;
+                //var response = httpClient.PostAsync(url, null).Result;
                 await context.PostAsync($"Response: {response}");
             }
  
