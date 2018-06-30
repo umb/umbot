@@ -161,7 +161,7 @@
         public async Task restTest(IDialogContext context)
         {
             //string url = "https://reqres.in/api/users?page=3";
-            string url = "https://my-json-server.typicode.com/typicode/demo/posts";
+            string url = "https://my-json-server.typicode.com/UMB-Linus/test/posts";
             using (var httpClient = new HttpClient())
             {
                 httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
