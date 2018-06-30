@@ -67,7 +67,7 @@
             {
                 await this.restTest(context);
             }
-            else if (message.Text.ToLower().Contains("startJob"))
+            else if (message.Text.ToLower().Contains("startjob"))
             {
                 await this.startJob(context);
             }
