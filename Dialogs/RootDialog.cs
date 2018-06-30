@@ -67,6 +67,11 @@
             {
                 await this.restTest(context);
             }
+            else if (message.Text.ToLower().Contains("startJob"))
+            {
+                await this.startJob(context);
+            }
+            
             else
             {
                 await context.PostAsync("I am sorry I don't understand you");
@@ -154,6 +159,12 @@
             var html = wc.DownloadString(url);
             await context.PostAsync(html);
             }
+        }
+
+        public async Task startJob(IDialogContext context)
+        {
+            await context.PostAsync("Starting Job");
+            //https://portal.sfcore.ch/engine-rest/engine/process-definition/key/aProcessDefinitionKey/start
         }
 
         //Rest Test (Debugging Tool)
