@@ -1,11 +1,9 @@
 namespace BasicMultiDialogBot.Dialogs
 {
+    using Microsoft.Bot.Builder.Dialogs;
     using System;
     using System.Threading.Tasks;
-    using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
-    //Used for ICMP
-    using System.Net.NetworkInformation;
 
     [Serializable]
     public class PingDialog : IDialog<string>
@@ -14,7 +12,7 @@ namespace BasicMultiDialogBot.Dialogs
 
         public async Task StartAsync(IDialogContext context)
         {
-            await context.PostAsync("Which IP do you want to Ping?");
+            await context.PostAsync("Who do you want to ping?");
 
             context.Wait(this.MessageReceivedAsync);
         }
@@ -26,33 +24,9 @@ namespace BasicMultiDialogBot.Dialogs
             /* If the message returned is a valid name, return it to the calling dialog. */
             if ((message.Text != null) && (message.Text.Trim().Length > 0))
             {
-
-                bool pingable = false;
-                Ping pinger = null;
-
-                try
-                {
-                    pinger = new Ping();
-                    PingReply reply = pinger.Send("8.8.8.8");
-                    pingable = reply.Status == IPStatus.Success;
-                }
-                catch (PingException)
-                {
-                    // Discard PingExceptions and return false;
-                }
-                finally
-                {
-                    if (pinger != null)
-                    {
-                        pinger.Dispose();
-                    }
-                }
-
-                //return pingable;
-
                 /* Completes the dialog, removes it from the dialog stack, and returns the result to the parent/calling
                     dialog. */
-                context.Done(pingable);
+                context.Done(message.Text);
             }
             /* Else, try again by re-prompting the user. */
             else

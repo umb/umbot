@@ -20,13 +20,11 @@
     using System.Text;
 
     #pragma warning disable 1998
-
     [Serializable]
     public class RootDialog : IDialog<object>
     {
 
         private string name;
-        private int age;
 
         public async Task StartAsync(IDialogContext context)
         {
@@ -62,7 +60,8 @@
             }
             else if (message.Text.ToLower().Contains("ping"))
             {
-                await this.ping(context);                
+                //await this.ping(context);                
+                await this.SendPingMessageAsync(context);                
             }
             else if (message.Text.ToLower().Contains("test"))
             {
@@ -85,14 +84,13 @@
             try
             {
                 this.name = await result;
-
                 await context.PostAsync($"Loading Ping metrics for: { name }.");
-
+                await this.ping(context,name); 
                 //context.Call(new AgeDialog(this.name), this.AgeDialogResumeAfter);
             }
             catch (TooManyAttemptsException)
             {
-                await context.PostAsync("I'm sorry, I'm having issues understanding you. Let's try again.");
+                await context.PostAsync("I'm sorry, I'm having issues. Let's try again.");
 
                 await this.SendPingMessageAsync(context);
             }
@@ -127,12 +125,13 @@
 
 
         //Ping IP (Debugging Tool)
-        public async Task ping(IDialogContext context)
+        public async Task ping(IDialogContext context, string name)
         {
             //await this.SendPingMessageAsync(context);
             // Ping's the local machine.
             Ping pingSender = new Ping ();
-            string address = "8.8.8.8";
+            //string address = "8.8.8.8";
+            string address = name;
             PingReply reply = pingSender.Send (address);
 
             if (reply.Status == IPStatus.Success)
@@ -166,12 +165,10 @@
             {
                 httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
                 var html = httpClient.GetStringAsync(new Uri(url)).Result;
-                //await context.PostAsync("test");
-                await context.PostAsync(html);
+                //await context.PostAsync(html);
                 //dynamic testJ = JsonConvert.DeserializeObject(html);
                 //Read JSON
                 JsonTextReader reader = new JsonTextReader(new StringReader(html));
-                //List<string> outList = new List<string>();
                 while (reader.Read())
                 {
                     if (reader.Value != null)
@@ -185,7 +182,6 @@
                     //}
                 }
                 //await context.PostAsync(outList);
-
             }
         }
     }
