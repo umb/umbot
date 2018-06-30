@@ -157,8 +157,8 @@
         //Rest Test (Debugging Tool)
         public async Task restTest(IDialogContext context)
         {
-            string url = "https://reqres.in/api/users?page=3";
-            //string url = "https://api.github.com/repos/powershell/powershell/issues";
+            //string url = "https://reqres.in/api/users?page=3";
+            string url = "https://jsonplaceholder.typicode.com/posts/";
             using (var httpClient = new HttpClient())
             {
                 httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
@@ -166,33 +166,20 @@
                 await context.PostAsync("test");
                 await context.PostAsync(html);
                 //dynamic testJ = JsonConvert.DeserializeObject(html);
+                //Read JSON
                 JsonTextReader reader = new JsonTextReader(new StringReader(html));
                 while (reader.Read())
                 {
                     if (reader.Value != null)
                     {
-                        Console.WriteLine("Token: {0}, Value: {1}", reader.TokenType, reader.Value);
                         await context.PostAsync($"Token: {reader.TokenType}, Value: {reader.Value}");
                     }
                     else
                     {
-                        Console.WriteLine("Token: {0}", reader.TokenType);
                         await context.PostAsync($"Token: {reader.TokenType}");
                     }
                 }                
             }
-//var json = JsonConvert.DeserializeObject(html);
-            //string name = json.first_name;
-            //BlogSites test = JsonConvert.DeserializeObject<BlogSites>(html); 
-            //JsonConvert.PopulateObject(html, test);
-            //var test = JsonConvert.DeserializeObject<dynamic>(html); 
-            //await context.PostAsync(html);
-            //Movie test = JsonConvert.DeserializeObject<Movie>(html);
-            //dynamic test = JsonConvert.DeserializeObject<dynamic>(html);
-            //dynamic test = JsonConvert.DeserializeObject(html);
-            //string count = test.count;
-            //string last_name = test.last_name;
-            //await context.PostAsync(test);
         }
     }
 }
