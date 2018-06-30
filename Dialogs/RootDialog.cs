@@ -14,7 +14,10 @@
     //REST API
     using System.Net.Http;
     using System.Net.Http.Headers;
-
+    //Array Handling
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
 
     #pragma warning disable 1998
 
@@ -168,18 +171,20 @@
                 //dynamic testJ = JsonConvert.DeserializeObject(html);
                 //Read JSON
                 JsonTextReader reader = new JsonTextReader(new StringReader(html));
-                
+                //List<string> outList = new List<string>();
                 while (reader.Read())
                 {
                     if (reader.Value != null)
                     {
                         await context.PostAsync($"Path: {reader.Path},Token: {reader.TokenType}, Value: {reader.Value}");
+                        //outList.Add($"Path: {reader.Path},Token: {reader.TokenType}, Value: {reader.Value}");
                     }
                     //else
                     //{
                     //    await context.PostAsync($"Token: {reader.TokenType}");
                     //}
                 }
+                //await context.PostAsync(outList);
 
             }
         }
