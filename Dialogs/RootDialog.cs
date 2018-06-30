@@ -157,8 +157,8 @@
         //Rest Test (Debugging Tool)
         public async Task restTest(IDialogContext context)
         {
-            //string url = "https://reqres.in/api/users?page=3";
-            string url = "https://api.github.com/repos/powershell/powershell/issues";
+            string url = "https://reqres.in/api/users?page=3";
+            //string url = "https://api.github.com/repos/powershell/powershell/issues";
             using (var httpClient = new HttpClient())
             {
                 httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
