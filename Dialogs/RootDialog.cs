@@ -42,7 +42,7 @@
             {
                 await context.PostAsync(
                     "The following commands are supported:\n\n"
-                    +"getHealth, deployServer, ping, myip");
+                    +"getHealth, deployServer, ping, myip, startJob");
             }
             else if (message.Text.ToLower().Contains("health"))
             {
