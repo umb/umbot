@@ -163,18 +163,9 @@
             {
                 httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
                 var html = httpClient.GetStringAsync(new Uri(url)).Result;
+                await context.PostAsync("test");
                 await context.PostAsync(html);
-                dynamic testJ = JsonConvert.DeserializeObject(html);
-                string json = @"{
-                            'CPU': 'Intel',
-                            'PSU': '500W',
-                            'Drives': [
-                                'DVD read/writer'
-                                /*(broken)*/,
-                                '500 gigabyte hard drive',
-                                '200 gigabype hard drive'
-                            ]
-                            }";
+                //dynamic testJ = JsonConvert.DeserializeObject(html);
                 JsonTextReader reader = new JsonTextReader(new StringReader(html));
                 while (reader.Read())
                 {
