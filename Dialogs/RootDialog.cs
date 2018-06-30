@@ -167,10 +167,9 @@
             //Movie test = JsonConvert.DeserializeObject<Movie>(html);
             //dynamic test = JsonConvert.DeserializeObject<dynamic>(html);
             dynamic test = JsonConvert.DeserializeObject(html);
-            string first_name = test.first_name;
-            string last_name = test.last_name;
-            await context.PostAsync(first_name);
-            await context.PostAsync(last_name);
+            string count = test.count;
+            //string last_name = test.last_name;
+            await context.PostAsync(count);
             }
         }
     }
