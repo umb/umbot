@@ -164,7 +164,7 @@
                 httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
                 var html = httpClient.GetStringAsync(new Uri(url)).Result;
                 //await context.PostAsync("test");
-                //await context.PostAsync(html);
+                await context.PostAsync(html);
                 //dynamic testJ = JsonConvert.DeserializeObject(html);
                 //Read JSON
                 JsonTextReader reader = new JsonTextReader(new StringReader(html));
@@ -174,10 +174,10 @@
                     {
                         await context.PostAsync($"Token: {reader.TokenType}, Value: {reader.Value}");
                     }
-                    else
-                    {
-                        await context.PostAsync($"Token: {reader.TokenType}");
-                    }
+                    //else
+                    //{
+                    //    await context.PostAsync($"Token: {reader.TokenType}");
+                    //}
                 }                
             }
         }
