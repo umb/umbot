@@ -179,6 +179,7 @@
                     if (reader.Value != null)
                     {
                         await context.PostAsync($"Path: {reader.Path},Token: {reader.TokenType}, Value: {reader.Value}");
+                         
                         //outList.Add($"Path: {reader.Path},Token: {reader.TokenType}, Value: {reader.Value}");
                     }
                     //else
@@ -192,7 +193,8 @@
         public async Task startJob(IDialogContext context)
         {
             await context.PostAsync("Starting Job");
-            string url = "https://portal.sfcore.ch/engine-rest/engine/process-definition/key/aProcessDefinitionKey/start";
+            //string url = "https://portal.sfcore.ch/engine-rest/engine/process-definition/key/aProcessDefinitionKey/start";
+            string url = "https://portal.sfcore.ch/engine-rest/engine/process-definition/key/workflow-automation/start";
             string json = @"{
             'variables': {
                 'aProcessVariable' : {
