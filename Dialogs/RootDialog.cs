@@ -192,7 +192,7 @@
         public async Task startJob(IDialogContext context)
         {
             await context.PostAsync("Starting Job");
-            //https://portal.sfcore.ch/engine-rest/engine/process-definition/key/aProcessDefinitionKey/start
+            string url = "https://portal.sfcore.ch/engine-rest/engine/process-definition/key/aProcessDefinitionKey/start";
             string json = @"{
             'variables': {
                 'aProcessVariable' : {
@@ -227,15 +227,18 @@
                 }
                 ]
             }";
-            JsonTextReader reader = new JsonTextReader(new StringReader(json));
-            while (reader.Read())
+            dynamic testJ = JsonConvert.DeserializeObject(json);
+            using (var httpClient = new HttpClient())
             {
-                if (reader.Value != null)
-                {
-                    await context.PostAsync($"Path: {reader.Path},Token: {reader.TokenType}, Value: {reader.Value}");
-                    //outList.Add($"Path: {reader.Path},Token: {reader.TokenType}, Value: {reader.Value}");
-                }
+                httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
+                //var html = httpClient.GetStringAsync(new Uri(url)).Result;
+                
+                var response = httpClient.PostAsync(url, testJ).Result; 
+                await context.PostAsync($"Response: {response}");
             }
+ 
+
+
         }
     }
 }
