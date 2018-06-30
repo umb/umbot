@@ -168,17 +168,19 @@
                 //dynamic testJ = JsonConvert.DeserializeObject(html);
                 //Read JSON
                 JsonTextReader reader = new JsonTextReader(new StringReader(html));
+                
                 while (reader.Read())
                 {
                     if (reader.Value != null)
                     {
-                        await context.PostAsync($"Token: {reader.TokenType}, Value: {reader.Value}");
+                        await context.PostAsync($"Path: {reader.Path},Token: {reader.TokenType}, Value: {reader.Value}");
                     }
                     //else
                     //{
                     //    await context.PostAsync($"Token: {reader.TokenType}");
                     //}
-                }                
+                }
+
             }
         }
     }
