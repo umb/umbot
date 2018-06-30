@@ -161,12 +161,6 @@
             }
         }
 
-        public async Task startJob(IDialogContext context)
-        {
-            await context.PostAsync("Starting Job");
-            //https://portal.sfcore.ch/engine-rest/engine/process-definition/key/aProcessDefinitionKey/start
-        }
-
         //Rest Test (Debugging Tool)
         public async Task restTest(IDialogContext context)
         {
@@ -193,6 +187,54 @@
                     //}
                 }
                 //await context.PostAsync(outList);
+            }
+        }
+        public async Task startJob(IDialogContext context)
+        {
+            await context.PostAsync("Starting Job");
+            //https://portal.sfcore.ch/engine-rest/engine/process-definition/key/aProcessDefinitionKey/start
+            string json = @"{
+            'variables': {
+                'aProcessVariable' : {
+                'value' : 'aStringValue',
+                'type': 'String'
+                }
+            },
+            'businessKey' : 'myBusinessKey',
+            'skipCustomListeners' : true,
+            'startInstructions' :
+                [
+                {
+                    'type': 'startBeforeActivity',
+                    'activityId': 'activityId',
+                    'variables': {
+                    'var': {
+                        'value': 'aVariableValue',
+                        'local': false,
+                        'type': 'String'}
+                    }
+                },
+                {
+                    'type': 'startAfterActivity',
+                    'activityId': 'anotherActivityId',
+                    'variables': {
+                    'varLocal': {
+                        'value': 'anotherVariableValue',
+                        'local': true,
+                        'type': 'String'
+                    }
+                    }
+                }
+                ]
+            }";
+            JsonTextReader reader = new JsonTextReader(new StringReader(json));
+            while (reader.Read())
+            {
+                if (reader.Value != null)
+                {
+                    await context.PostAsync($"Path: {reader.Path},Token: {reader.TokenType}, Value: {reader.Value}");
+                    //outList.Add($"Path: {reader.Path},Token: {reader.TokenType}, Value: {reader.Value}");
+                }
             }
         }
     }
