@@ -194,7 +194,7 @@
         {
             await context.PostAsync("Starting Job");
             //string url = "https://portal.sfcore.ch/engine-rest/engine/process-definition/key/aProcessDefinitionKey/start";
-            string url = "https://portal.sfcore.ch/engine-rest/engine/process-definition/key/workflow-automation/start";
+            string url = "https://portal.sfcore.ch/engine-rest/process-definition/key/workflow-automation/start";
             string json = @"{
             'variables': {
                 'aProcessVariable' : {
